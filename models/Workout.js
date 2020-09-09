@@ -7,10 +7,16 @@ const WorkoutSchema = new Schema ({
         type: String,
         unique: true
     },
-    exercises: [{
+    exercises: [
+        {
         type: Schema.Types.ObjectId,
-        ref: "Resistance" , "Cardio"
-    }]
+        ref: "Resistance"
+    },
+    {
+        type: Schema.Types.ObjectId,
+        ref: "Cardio"
+    }
+]
 });
 
 const Workout = mongoose.model("Workout" , WorkoutSchema);
