@@ -7,20 +7,24 @@ const workoutSchema = new Schema({
         type: String,
         unique: true
     },
-    date: Date,
+    day: {
+        type: Date,
+        default: () => new Date(),
+      },
     exercises: [
         {
-            type: String,
+            type:{type:String},
             name: String,
             duration: Number,
             weight: Number,
             reps: Number,
-            sets: Number
+            sets: Number,
+            distance: Number
         }],
     },
     {
         toJSON: {
-            virtual: true
+            virtuals: true
         }
     }
 )
