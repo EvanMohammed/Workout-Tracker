@@ -10,8 +10,9 @@ app.use(logger("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
+console.log(process.env.MONGODB_URI);
+mongoose.connect('mongodb+srv://fitness:Evan123456@cluster0.z2aew.mongodb.net/Workout?retryWrites=true&w=majority', {
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
   useNewUrlParser: true,
   useFindAndModify: false,
 });
