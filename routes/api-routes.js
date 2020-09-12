@@ -27,7 +27,7 @@ module.exports = function (app) {
         console.log(err);
         res.json(err);
       });
-    console.log(req.body)
+   
   });
 
   app.get("/api/workout", (req, res) => {
