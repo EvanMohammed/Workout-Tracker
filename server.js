@@ -14,68 +14,15 @@ app.use(express.static("public"));
 // app.use("/", router);
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
   useNewUrlParser: true,
-});
-app.get("/api/workout", (req, res) => {
-  Workout.find()
-  .then((dbworkout) => {
-    res.json(dbworkout);
-  })
-  .catch((err) => {
-    res.json.err;
-  });
-});
-// router.route("/api/workout").post(function (req,res) {
-//   db.Workout.insertMany(
-//     [{name},
-//     {exercises}],
-//     function (err,result) {
-//       if (err) {
-//         console.log(err);
-//         res.json(err)
-//       } else {
-//         res.send(result)
-//       }
-//     }
-//   )
-// })
-app.post("/api/workout", (req, res) => {
-  db.Workout.create({}).then((data) => res.json(data))
+  useFindAndModify: false,
 });
 
-app.put("/api/workout/:id", ({body, params}, res) => {
-  console.log(body)
-  Workout.findByIdAndUpdate(
-    params.id,
-    { $push: { exercises: body}  },
-    { new: true, runValidators: true }
-  )
-    .then((data) => res.json(data))
-    .catch((err) => {
-      console.log(err);
-      res.json(err);
-    });
-    console.log(req.body)
-});
-app.get("/exercise", (req, res) => {
-  res.sendFile(path.join(__dirname, "/public/exercise.html"));
-});
-app.get("/stats", (req, res) => {
-  res.sendFile(path.join(__dirname, "/public/stats.html"));
-});
-app.get("/api/workout", (req, res) => {
-  Workout.find().then((data) => {
-    res.json(data)
-  }).catch(err =>{
-    console.log(err)
-  })
-});
-app.get("/stats", (req, res) => {
-  Workout.find().then((data) => {
-    res.json(data)
-  }).catch(err =>{
-    console.log(err)
-  })
-});
+// Requiring the Routes
+require("./routes/api-routes")(app);
+
+require("./routes/html-routes")(app);
+
+
 app.listen(PORT, () => {
   console.log(`App running on port http://localhost:${PORT}`);
 });
