@@ -12,7 +12,7 @@ module.exports = function (app) {
   });
 
   app.post("/api/workout", (req, res) => {
-    db.Workout.create({}).then((data) => res.json(data))
+   Workout.create({}).then((data) => res.json(data))
   });
 
   app.put("/api/workout/:id", ({ body, params }, res) => {
